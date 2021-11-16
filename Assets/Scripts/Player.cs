@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public static Text playerStats;
 
     public static int score = 0;
-    public static int lives = 3;
+    public static int damage = 0;
 
     public GameObject explosionPrefab;
 
@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
         playerStats = GameObject.Find("PlayerStats").GetComponent<Text>();
         
         UpdateStats();
+        
     }
 
     // Update is called once per frame
@@ -58,17 +59,22 @@ public class Player : MonoBehaviour
         #endregion
 
         #region OPTIONAL TASKS : rotation and up/down-movement
-        // Stop at upper/lower edge of screen
-        if (transform.position.y < -screenbounds.y)
+        
+
+
+        // Stop at lower edge and 2/3 of screen
+        if (transform.position.y < -screenbounds.y + 6)
         {
             // upper edge
-            transform.position = new Vector3(transform.position.x, -screenbounds.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, -screenbounds.y + 6, transform.position.z);
         }
-        if (transform.position.y > screenbounds.y)
+        if (transform.position.y > screenbounds.y - 5)
         {
             // lower edge
-            transform.position = new Vector3(transform.position.x, screenbounds.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, screenbounds.y - 5, transform.position.z);
         }
+        
+
 
         // Rotate cube whilst moving left/right
         // Note: Video that explains what Quaternions are: https://www.youtube.com/watch?v=1yoFjjJRnLY&t=34s
@@ -104,7 +110,7 @@ public class Player : MonoBehaviour
 
     public static void UpdateStats()
     {
-        playerStats.text = "Score: " + score.ToString() + "\nLives: " + lives.ToString();
+        playerStats.text = "Score: " + score.ToString() + "\nDamage: " + damage.ToString();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -113,7 +119,7 @@ public class Player : MonoBehaviour
         //other is the Collider of the other GameObject
         if (other.tag == "Enemy") //Make sure your enemy's Tag is "Enemy" !!!
         {
-            lives--;
+            damage++;
             UpdateStats();
 
             Enemy enemy = other.GetComponent<Enemy>();
