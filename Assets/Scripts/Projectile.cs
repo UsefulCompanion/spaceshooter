@@ -7,12 +7,17 @@ public class Projectile : MonoBehaviour
     public float projectileSpeed;
     private Vector2 screenbounds;
 
+    public AudioClip shot, impact;
+
     public GameObject explosionPrefab;
     
     // Start is called before the first frame update
     void Start()
     {
         screenbounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+
+        AudioSource.PlayClipAtPoint(shot, transform.position);
+
     }
 
     // Update is called once per frame
@@ -45,6 +50,8 @@ public class Projectile : MonoBehaviour
 
             Player.score += 100;
             Player.UpdateStats();
+
+            AudioSource.PlayClipAtPoint(impact, transform.position);
             
             Destroy(gameObject);
         }

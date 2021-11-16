@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public float playerSpeed;
     private Vector2 screenbounds;
     public GameObject projectilePrefab;
+    public AudioClip hurt;
 
     public static Text playerStats;
 
@@ -119,6 +120,8 @@ public class Player : MonoBehaviour
             enemy.SetPositionAndSpeed();
 
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+            AudioSource.PlayClipAtPoint(hurt, transform.position);
         }
     }
 }
