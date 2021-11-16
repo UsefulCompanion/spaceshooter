@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -8,12 +10,27 @@ public class Player : MonoBehaviour
     private Vector2 screenbounds;
     public GameObject projectilePrefab;
 
+    public static Text playerStats;
+
+    public static int score = 0;
+    public static int lives = 3;
+
+    public GameObject explosionPrefab;
+
     // Awake
     // Start is called before the first frame update
     void Start()
     {
         screenbounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
         // IMPORTANT: screenbounds only works with Camera Projection = Orthographic and Camera position x = 0 and y = 0
+        
+        //Find(string name) Finds a GameObject by name and returns it.
+        //Documentation: https://docs.unity3d.com/ScriptReference/GameObject.Find.html
+        //GetComponent<T>() returns the component of Type T if the game object has one attached, null if it doesn't.
+        //Documentation: https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html
+        playerStats = GameObject.Find("PlayerStats").GetComponent<Text>();
+        
+        UpdateStats();
     }
 
     // Update is called once per frame
@@ -83,4 +100,25 @@ public class Player : MonoBehaviour
 
     // FixedUpdate() 0.02s
     // LateUpdate()
+
+    public static void UpdateStats()
+    {
+        playerStats.text = "Score: " + score.ToString() + "\nLives: " + lives.ToString();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //When the gameObject collides with another GameObject, Unity calls OnTriggerEnter.
+        //other is the Collider of the other GameObject
+        if (other.tag == "Enemy") //Make sure your enemy's Tag is "Enemy" !!!
+        {
+            lives--;
+            UpdateStats();
+
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.SetPositionAndSpeed();
+
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        }
+    }
 }

@@ -6,6 +6,8 @@ public class Projectile : MonoBehaviour
 {
     public float projectileSpeed;
     private Vector2 screenbounds;
+
+    public GameObject explosionPrefab;
     
     // Start is called before the first frame update
     void Start()
@@ -29,4 +31,22 @@ public class Projectile : MonoBehaviour
     {
         Destroy(gameObject);
     }*/
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //When the gameObject collides with another GameObject, Unity calls OnTriggerEnter.
+        //other is the Collider of the other GameObject
+        if (other.tag == "Enemy") //Make sure your enemy's Tag is "Enemy" !!!
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.SetPositionAndSpeed();
+
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+            Player.score += 100;
+            Player.UpdateStats();
+            
+            Destroy(gameObject);
+        }
+    }
 }
