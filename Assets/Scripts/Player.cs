@@ -19,8 +19,6 @@ public class Player : MonoBehaviour
     public static int damage = 0;
 
     public GameObject explosionPrefab;
-    
-    
 
     // Awake
     // Start is called before the first frame update
