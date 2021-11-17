@@ -128,4 +128,5 @@ MonoBehaviour:
   playerSpeed: 7
   projectilePrefab: {fileID: 9163432679814902873, guid: 5f1debec97c257143a81215cea60e65c, type: 3}
   hurt: {fileID: 8300000, guid: 58befb44cc957344ba47094ba7d0cee2, type: 3}
+  pivotPoint: {x: 0, y: 50, z: 0}
   explosionPrefab: {fileID: 5050232606267625, guid: 804d90c66c52412458e23cf6e10a1c49, type: 3}

@@ -11,12 +11,16 @@ public class Player : MonoBehaviour
     public GameObject projectilePrefab;
     public AudioClip hurt;
 
+    public Vector3 pivotPoint;
+
     public static Text playerStats;
 
     public static int score = 0;
     public static int damage = 0;
 
     public GameObject explosionPrefab;
+    
+    
 
     // Awake
     // Start is called before the first frame update
@@ -32,6 +36,7 @@ public class Player : MonoBehaviour
         playerStats = GameObject.Find("PlayerStats").GetComponent<Text>();
         
         UpdateStats();
+
         
     }
 
@@ -131,4 +136,6 @@ public class Player : MonoBehaviour
             AudioSource.PlayClipAtPoint(hurt, transform.position);
         }
     }
+
+
 }
