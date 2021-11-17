@@ -80,17 +80,17 @@ public class Player : MonoBehaviour
         // Note: Video that explains what Quaternions are: https://www.youtube.com/watch?v=1yoFjjJRnLY&t=34s
         if (amtToMove.x > 0)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(-90, 20, 0), 0.3f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(-90, -30, 0), 0.03f);
             //BE CAREFUL, YOUR PLAYER MAY HAVE A DIFFERENT START ROTATION (mine must be -90° in x, yours may be 0° in x)
         }
         else if (amtToMove.x < 0)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(-90, -20, 0), 0.3f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(-90, 30, 0), 0.03f);
             //BE CAREFUL, YOUR PLAYER MAY HAVE A DIFFERENT START ROTATION (mine must be -90° in x, yours may be 0° in x)
         }
         else
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(-90, 0, 0), 0.2f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(-90, 0, 0), 0.02f);
             //BE CAREFUL, YOUR PLAYER MAY HAVE A DIFFERENT START ROTATION (mine must be -90° in x, yours may be 0° in x)
         }
         #endregion
@@ -98,9 +98,10 @@ public class Player : MonoBehaviour
         #region fire projectile
         if (Input.GetKeyDown("space"))
         {
-            Vector3 pos = new Vector3(transform.position.x, transform.position.y + (0.6f * transform.localScale.y),
+            Vector3 pos = new Vector3(transform.position.x, transform.position.y + (0.6f * transform.localScale.y) + 1.5f,
                 transform.position.z);
-            Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            //Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            Instantiate(projectilePrefab, pos, Quaternion.identity);
         }
         #endregion
     }
