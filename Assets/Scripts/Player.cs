@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class Player : MonoBehaviour
     public static Text playerStats;
 
     public static int score = 0;
-    public static int damage = 0;
+    public static int lives = 3;
+    public static int missed = 0;
 
     public GameObject explosionPrefab;
 
@@ -114,7 +116,9 @@ public class Player : MonoBehaviour
 
     public static void UpdateStats()
     {
-        playerStats.text = "Score: " + score.ToString() + "\nDamage: " + damage.ToString();
+        playerStats.text = "Score: " + score.ToString() //$"Score: {score}"
+            + "\nLives: " + lives.ToString() 
+            + "\nMissed: " + missed.ToString();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -123,17 +127,38 @@ public class Player : MonoBehaviour
         //other is the Collider of the other GameObject
         if (other.tag == "Enemy") //Make sure your enemy's Tag is "Enemy" !!!
         {
-            damage++;
+            lives--;
             UpdateStats();
 
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.SetPositionAndSpeed();
 
-            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-
             AudioSource.PlayClipAtPoint(hurt, transform.position);
+
+            StartCoroutine(DestroyShip());
         }
     }
+
+
+    IEnumerator DestroyShip()
+    {
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        
+        transform.position = new Vector3(0f, transform.position.y, transform.position.z);
+        gameObject.GetComponent<Renderer>().enabled = false;
+
+        yield return new WaitForSeconds(0.5f); //WaitForSecondsRealtime
+
+
+        if(lives > 0){
+            gameObject.GetComponent<Renderer>().enabled = true;
+        } else {
+            SceneManager.LoadScene("Lose");
+        }
+
+    }
+
+
 
 
 }
