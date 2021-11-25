@@ -613,7 +613,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!1 &1558790730
 GameObject:
@@ -688,6 +688,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1578964782021748050, guid: b6d2f4e67f5e13e4dba0d8cdb27b8420, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578964782021748061, guid: b6d2f4e67f5e13e4dba0d8cdb27b8420, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3269570467244979841, guid: b6d2f4e67f5e13e4dba0d8cdb27b8420, type: 3}
       propertyPath: m_LocalPosition.y
       value: -1.56
@@ -772,5 +780,6 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8874698594784598631, guid: b6d2f4e67f5e13e4dba0d8cdb27b8420, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b6d2f4e67f5e13e4dba0d8cdb27b8420, type: 3}
