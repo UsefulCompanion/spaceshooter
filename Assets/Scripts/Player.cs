@@ -147,7 +147,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0f, transform.position.y, transform.position.z);
         //gameObject.GetComponent<Renderer>().enabled = false;
 
-        yield return new WaitForSeconds(0.5f); //WaitForSecondsRealtime
+        yield return new WaitForSeconds(0.5f); //!= WaitForSecondsRealtime
 
 
         if(lives > 0){
