@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             Vector3 pos = new Vector3(transform.position.x, transform.position.y + (0.6f * transform.localScale.y) + 1.5f,
-                transform.position.z);
+                transform.position.z - 0.75f);
             //Instantiate(projectilePrefab, transform.position, Quaternion.identity);
             Instantiate(projectilePrefab, pos, Quaternion.identity);
         }
@@ -145,13 +145,13 @@ public class Player : MonoBehaviour
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         
         transform.position = new Vector3(0f, transform.position.y, transform.position.z);
-        gameObject.GetComponent<Renderer>().enabled = false;
+        //gameObject.GetComponent<Renderer>().enabled = false;
 
         yield return new WaitForSeconds(0.5f); //WaitForSecondsRealtime
 
 
         if(lives > 0){
-            gameObject.GetComponent<Renderer>().enabled = true;
+            //gameObject.GetComponent<Renderer>().enabled = true;
         } else {
             SceneManager.LoadScene("Lose");
         }
